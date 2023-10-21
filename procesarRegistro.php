@@ -6,6 +6,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_usuario = $_POST["email_usuario"];
     $contraseña_usuario = $_POST["contraseña_usuario"];
     $fechaRegistro_usuario = $_POST["fechaRegistro_usuario"];
+    // Encripta la contraseña con Bcrypt
+    $contraseñaEncriptada = password_hash($contraseña_usuario, PASSWORD_BCRYPT);
 
     // Conectar a la base de datos (asegúrate de tener la configuración correcta)
     $host = "localhost";
@@ -21,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Preparar la consulta SQL para insertar un nuevo usuario
     $stmt = $conexion->prepare("INSERT INTO usuario (nombre_usuario, email_usuario, contraseña_usuario, fechaRegistro_usuario) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $nombre_usuario, $email_usuario, $contraseña_usuario, $fechaRegistro_usuario);
+    $stmt->bind_param("ssss", $nombre_usuario, $email_usuario, $contraseñaEncriptada, $fechaRegistro_usuario);
 
     // Ejecutar la consulta
     if ($stmt->execute()) {
