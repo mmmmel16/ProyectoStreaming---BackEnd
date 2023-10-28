@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-10-2023 a las 22:11:49
+-- Tiempo de generación: 29-10-2023 a las 00:45:36
 -- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Versión de PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -131,7 +131,11 @@ CREATE TABLE `eventodeporte` (
 --
 
 INSERT INTO `eventodeporte` (`id_evento`, `nombre_evento`, `tipo_deporte`, `fecha_evento`, `lugar_evento`, `img_evento`, `patrocinador_principal`, `horario_evento`) VALUES
-(8, 'Nuevo Nombre del Evento', 'Nuevo Tipo de Deporte', '2023-05-05', 'Lugar2', 'imagen2.jpg', 'Patrocinador2', '09:00:00'),
+(1, 'EventoCard1', 'Futbol', '2023-10-31', 'Club Independiente', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVRxEDkA-DBZ7dqxS7TfyXcOF2imBmQO5Cvqw1wy9EU6CPd-0gbuWiuCns3mZL4QF3LJI&usqp=CAU', 'Facultad de Ingenieria UNLPam', '16:00:00'),
+(2, 'EventoCard2', 'Handball', '2023-11-01', 'Campus UNLPam', 'https://i0.wp.com/radiodon.com.ar/wp-content/uploads/2023/06/UNLPam_voleyfemenino_JUAR_Patagonia_17junio2023.jpg?w=800&ssl=1', 'Trigo de Oro', '11:30:00'),
+(3, 'EventoCard3', 'Voley', '2023-11-10', 'Escuela Normal', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOabxBpZRWmYCkyuhUB8D8nxz1bkhE1F-VUootRf5ogfyxERIrtmI5yaDoIbs3wbnJxb0&usqp=CAU', 'UNLPam', '19:00:00'),
+(4, 'EventoCard4', 'Natacion', '2023-11-11', 'Club de Natacion GP', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxK1e0ztxL1LoeN_ruEqUQy175YUZI20DmLiJU5qTv9yq9LX2wcRjXXnf9w_qYstj_Sgw&usqp=CAU', 'Accesorios Deportivos GP', '12:00:00'),
+(8, 'Pico Fc vs Ferro', 'Nuevo Tipo de Deporte', '2023-05-05', 'Estadio El Coloso de Barrio Talleres', 'https://plataforma.iduo.com.ar/Panelcontenidos/Contenidos/t800-1611500538.jpeg', 'Patrocinador2', '09:00:00'),
 (9, 'Evento3', 'Deporte3', '2023-06-10', 'Lugar3', 'imagen3.jpg', 'Patrocinador3', '10:00:00');
 
 -- --------------------------------------------------------
@@ -153,7 +157,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `usuario`, `email_usuario`, `password`, `fechaRegistro_usuario`) VALUES
-(7, 'Usuario1', 'usuario1@email.com', 'contraseña123', '2023-01-15 00:00:00'),
+(7, 'Usuario1', 'usuario1@email.com', '123', '2023-01-15 00:00:00'),
 (8, 'Usuario2', 'usuario2@email.com', 'password456', '2023-02-20 00:00:00'),
 (9, 'Usuario3', 'usuario3@email.com', 'clave789', '2023-03-10 00:00:00'),
 (10, 'admin', 'admin@gmail.com', '$2y$10$aI0fjQaa3Q6ZWvnysEvYOO0NIoQvf/0lQZlIPpuKWh7FxKAWzbK/a', '2023-10-21 00:00:00');
@@ -230,36 +234,13 @@ ALTER TABLE `creador_mult`
 -- AUTO_INCREMENT de la tabla `eventodeporte`
 --
 ALTER TABLE `eventodeporte`
-  MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `administrador`
---
-ALTER TABLE `administrador`
-  ADD CONSTRAINT `administra` FOREIGN KEY (`id_admin`) REFERENCES `eventodeporte` (`id_evento`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `creador_mult`
---
-ALTER TABLE `creador_mult`
-  ADD CONSTRAINT `creado` FOREIGN KEY (`id_creador`) REFERENCES `contenidomult` (`id_contenido`);
-
---
--- Filtros para la tabla `eventodeporte`
---
-ALTER TABLE `eventodeporte`
-  ADD CONSTRAINT `participa` FOREIGN KEY (`id_evento`) REFERENCES `clubdepor` (`id_club`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `realaciona` FOREIGN KEY (`id_evento`) REFERENCES `contenidomult` (`id_contenido`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
