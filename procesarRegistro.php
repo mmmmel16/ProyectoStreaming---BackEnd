@@ -2,12 +2,12 @@
 // Verificar si se ha enviado el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recopilar datos del formulario
-    $nombre_usuario = $_POST["nombre_usuario"];
+    $usuario = $_POST["nombre_usuario"];
     $email_usuario = $_POST["email_usuario"];
-    $contraseña_usuario = $_POST["contraseña_usuario"];
+    $password = $_POST["password"];
     $fechaRegistro_usuario = $_POST["fechaRegistro_usuario"];
     // Encripta la contraseña con Bcrypt
-    $contraseñaEncriptada = password_hash($contraseña_usuario, PASSWORD_BCRYPT);
+    $contraseñaEncriptada = password_hash($password, PASSWORD_BCRYPT);
 
     // Conectar a la base de datos (asegúrate de tener la configuración correcta)
     $host = "localhost";
@@ -22,8 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Preparar la consulta SQL para insertar un nuevo usuario
-    $stmt = $conexion->prepare("INSERT INTO usuario (nombre_usuario, email_usuario, contraseña_usuario, fechaRegistro_usuario) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $nombre_usuario, $email_usuario, $contraseñaEncriptada, $fechaRegistro_usuario);
+    $stmt = $conexion->prepare("INSERT INTO usuario (nombre_usuario, email_usuario, password, fechaRegistro_usuario) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $usuario, $email_usuario, $contraseñaEncriptada, $fechaRegistro_usuario);
 
     // Ejecutar la consulta
     if ($stmt->execute()) {

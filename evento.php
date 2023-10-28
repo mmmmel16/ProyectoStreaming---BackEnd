@@ -1,45 +1,44 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Eventos</title>
-</head>
-<body>
-    <header>
-        <h1>Lista de Eventos</h1>
-    </header>
-    <main>
-        <?php
-        // Conecta a la base de datos (asegúrate de tener la conexión a la base de datos configurada)
-        $host = "localhost";
-        $usuario = "root";
-        $password = "";
-        $bd = "api_streaming";
-        $conexion = new mysqli($host, $usuario, $password, $bd);
+<?php
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
+header('Access-Control-Allow-Methods: POST'); // Solo permitimos el método POST
+header('Content-Type: application/json');
 
-        if ($conexion->connect_error) {
-            die("La conexión a la base de datos ha fallado: " . $conexion->connect_error);
-        }
+// Conecta a la base de datos (asegúrate de tener la conexión a la base de datos configurada)
+$host = "localhost";
+$usuario = "root";
+$password = "";
+$bd = "api_streaming";
+$conexion = new mysqli($host, $usuario, $password, $bd);
 
-        // Consulta para obtener todos los eventos
-        $consulta = $conexion->query("SELECT id_evento, nombre_evento, tipo_deporte, fecha_evento, lugar_evento, img_evento, patrocinador_principal, horario_evento FROM eventodeporte");
+if ($conexion->connect_error) {
+    die("La conexión a la base de datos ha fallado: " . $conexion->connect_error);
+}
 
-        // Itera sobre los resultados y muestra cada evento
-        while ($evento = $consulta->fetch_assoc()) {
-            echo "<h2>{$evento['nombre_evento']}</h2>";
-            echo "<p>Tipo de Deporte: {$evento['tipo_deporte']}</p>";
-            echo "<p>Fecha del Evento: {$evento['fecha_evento']}</p>";
-            echo "<p>Lugar del Evento: {$evento['lugar_evento']}</p>";
-            echo "<img src='{$evento['img_evento']}' alt='{$evento['nombre_evento']}' />";
-            echo "<p>Patrocinador Principal: {$evento['patrocinador_principal']}</p>";
-            echo "<p>Horario del Evento: {$evento['horario_evento']}</p>";
-            echo "<a href='detalle_evento.php?id={$evento['id_evento']}'>Ver detalles</a>"; // Agrega un enlace para ver detalles individuales
-        }
+// Consulta para obtener todos los eventos
+$consulta = $conexion->query("SELECT id_evento, nombre_evento, tipo_deporte, fecha_evento, lugar_evento, img_evento, patrocinador_principal, horario_evento FROM eventodeporte");
 
-        $consulta->close();
-        $conexion->close();
-        ?>
-    </main>
-</body>
-</html>
+// Inicializa un array para almacenar los eventos
+$eventos = array();
+
+// Itera sobre los resultados y agrega cada evento al array
+while ($evento = $consulta->fetch_assoc()) {
+    $eventos[] = array(
+        'id_evento' => $evento['id_evento'],
+        'nombre_evento' => $evento['nombre_evento'],
+        'tipo_deporte' => $evento['tipo_deporte'],
+        'fecha_evento' => $evento['fecha_evento'],
+        'lugar_evento' => $evento['lugar_evento'],
+        'img_evento' => $evento['img_evento'],
+        'patrocinador_principal' => $evento['patrocinador_principal'],
+        'horario_evento' => $evento['horario_evento']
+        
+    );
+}
+// Cierra la consulta y la conexión a la base de datos
+$consulta->close();
+$conexion->close();
+
+// Convierte el array de eventos en formato JSON y devuelve la respuesta
+echo json_encode($eventos);
+?>
