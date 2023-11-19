@@ -16,10 +16,11 @@ if ($conexion->connect_error) {
 }
 
 // Consulta para obtener todos los eventos
-$consulta = $conexion->query("SELECT id_evento, nombre_evento, tipo_deporte, fecha_evento, lugar_evento, img_evento, patrocinador_principal, horario_evento FROM eventodeporte");
+//$consulta = $conexion->query("SELECT id_evento, nombre_evento, tipo_deporte, fecha_evento, lugar_evento, img_evento, patrocinador_principal, horario_evento, url_transmision FROM eventodeporte");
+$consulta = $conexion->query("SELECT id_evento, nombre_evento, tipo_deporte, fecha_evento, lugar_evento, img_evento, patrocinador_principal, horario_evento, url_transmision FROM eventodeporte");
 
 // Inicializa un array para almacenar los eventos
-$eventos = array();
+$eventos = array(); 
 
 // Itera sobre los resultados y agrega cada evento al array
 while ($evento = $consulta->fetch_assoc()) {
@@ -31,8 +32,8 @@ while ($evento = $consulta->fetch_assoc()) {
         'lugar_evento' => $evento['lugar_evento'],
         'img_evento' => $evento['img_evento'],
         'patrocinador_principal' => $evento['patrocinador_principal'],
-        'horario_evento' => $evento['horario_evento']
-        
+        'horario_evento' => $evento['horario_evento'],
+        'url_transmision' => $evento['url_transmision'] 
     );
 }
 // Cierra la consulta y la conexión a la base de datos
