@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-10-2023 a las 00:45:36
+-- Tiempo de generación: 19-11-2023 a las 15:02:25
 -- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.0.28
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -123,20 +123,25 @@ CREATE TABLE `eventodeporte` (
   `lugar_evento` varchar(255) NOT NULL,
   `img_evento` varchar(255) NOT NULL,
   `patrocinador_principal` varchar(255) NOT NULL,
-  `horario_evento` time NOT NULL
+  `horario_evento` time NOT NULL,
+  `url_transmision` varchar(400) NOT NULL COMMENT 'https://www.youtube.com/watch?v=2IfTdw28WFY'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `eventodeporte`
 --
 
-INSERT INTO `eventodeporte` (`id_evento`, `nombre_evento`, `tipo_deporte`, `fecha_evento`, `lugar_evento`, `img_evento`, `patrocinador_principal`, `horario_evento`) VALUES
-(1, 'EventoCard1', 'Futbol', '2023-10-31', 'Club Independiente', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVRxEDkA-DBZ7dqxS7TfyXcOF2imBmQO5Cvqw1wy9EU6CPd-0gbuWiuCns3mZL4QF3LJI&usqp=CAU', 'Facultad de Ingenieria UNLPam', '16:00:00'),
-(2, 'EventoCard2', 'Handball', '2023-11-01', 'Campus UNLPam', 'https://i0.wp.com/radiodon.com.ar/wp-content/uploads/2023/06/UNLPam_voleyfemenino_JUAR_Patagonia_17junio2023.jpg?w=800&ssl=1', 'Trigo de Oro', '11:30:00'),
-(3, 'EventoCard3', 'Voley', '2023-11-10', 'Escuela Normal', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOabxBpZRWmYCkyuhUB8D8nxz1bkhE1F-VUootRf5ogfyxERIrtmI5yaDoIbs3wbnJxb0&usqp=CAU', 'UNLPam', '19:00:00'),
-(4, 'EventoCard4', 'Natacion', '2023-11-11', 'Club de Natacion GP', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxK1e0ztxL1LoeN_ruEqUQy175YUZI20DmLiJU5qTv9yq9LX2wcRjXXnf9w_qYstj_Sgw&usqp=CAU', 'Accesorios Deportivos GP', '12:00:00'),
-(8, 'Pico Fc vs Ferro', 'Nuevo Tipo de Deporte', '2023-05-05', 'Estadio El Coloso de Barrio Talleres', 'https://plataforma.iduo.com.ar/Panelcontenidos/Contenidos/t800-1611500538.jpeg', 'Patrocinador2', '09:00:00'),
-(9, 'Evento3', 'Deporte3', '2023-06-10', 'Lugar3', 'imagen3.jpg', 'Patrocinador3', '10:00:00');
+INSERT INTO `eventodeporte` (`id_evento`, `nombre_evento`, `tipo_deporte`, `fecha_evento`, `lugar_evento`, `img_evento`, `patrocinador_principal`, `horario_evento`, `url_transmision`) VALUES
+(8, 'Pico Fc vs Ferro', 'Nuevo Tipo de Deporte', '2023-05-05', 'Estadio El Coloso de Barrio Talleres', 'https://plataforma.iduo.com.ar/Panelcontenidos/Contenidos/t800-1611500538.jpeg', 'Patrocinador2', '09:00:00', ''),
+(9, 'Evento3', 'Deporte3', '2023-06-10', 'Lugar3', 'https://library.sportingnews.com/styles/crop_style_16_9_desktop/s3/2023-08/Voley%202023.jpg?h=920929c4&itok=geddfDuw', 'Patrocinador3', '10:00:00', 'https://www.youtube.com/watch?v=rj__9AbeJxY'),
+(10, 'Evento4', 'Basquet', '2023-11-22', 'Pico futbol', 'https://cnnespanol.cnn.com/wp-content/uploads/2023/10/GettyImages-1747141678-e1697838528134.jpg?quality=100&strip=info&w=940&h=530&crop=1', '', '00:00:00', 'https://www.twitch.tv/elcanaldejoaco'),
+(11, 'Evento5', 'safsdfsdfsd', '2023-11-15', 'sfdfsdf', 'https://www.elgrafico.com.ar/media/cache/pub_news_details_large/media/i/7b/3c/7b3c07e6c3716df97670f11e3ca2d958674e99e7.jpeg', 'dfdgd', '00:00:00', 'https://www.youtube.com/watch?v=NuluT5g6rfs'),
+(12, 'Evento5', 'safsdfsdfsd', '2023-11-29', 'sfdfsdf', 'https://www.elgrafico.com.ar/media/cache/pub_news_details_large/media/i/7b/3c/7b3c07e6c3716df97670f11e3ca2d958674e99e7.jpeg', 'dfdgd', '00:00:00', 'https://www.youtube.com/watch?v=Va7vEuPJkds'),
+(13, 'afsdfsd', 'fsdfdfds', '2023-11-30', 'sfdfsdfsd', 'https://a.espncdn.com/combiner/i?img=/photo/2023/1117/r1254173_1296x729_16-9.jpg', '', '00:00:00', ''),
+(14, 'dfdsfdsf', 'asdasdad', '2023-11-28', 'dasdad', 'https://a.espncdn.com/combiner/i?img=/photo/2023/1117/r1254173_1296x729_16-9.jpg', '', '00:36:22', 'sdf'),
+(15, 'FDGfdgdfg', 'dfgdfgfgd', '2023-11-26', 'dfsdfsdf', 'https://s10.s3c.es/imag/_v0/770x420/3/0/0/600x400_770x420-hombre-jugando-campo-de-golf.jpg', 'sfsdfd', '00:00:00', 'https://www.youtube.com/watch?v=Va7vEuPJkds'),
+(16, 'FDGfdgdfg', 'dfgdfgfgd', '2023-11-26', 'dfsdfsdf', 'https://s10.s3c.es/imag/_v0/770x420/3/0/0/600x400_770x420-hombre-jugando-campo-de-golf.jpg', 'sfsdfd', '00:00:00', ''),
+(17, 'sfsdfsdf', 'dfsfsdfdsf', '2023-11-25', 'asdasdas', 'https://depor.com/resizer/xp0-X8VSt0I0PPOqa6OcNKZGmVg=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/J5SDKRT65NFX3BJEOH3RON6YFQ.jpg', '', '00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -157,7 +162,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `usuario`, `email_usuario`, `password`, `fechaRegistro_usuario`) VALUES
-(7, 'Usuario1', 'usuario1@email.com', '123', '2023-01-15 00:00:00'),
+(7, 'admin', 'usuario1@email.com', 'admin', '2023-01-15 00:00:00'),
 (8, 'Usuario2', 'usuario2@email.com', 'password456', '2023-02-20 00:00:00'),
 (9, 'Usuario3', 'usuario3@email.com', 'clave789', '2023-03-10 00:00:00'),
 (10, 'admin', 'admin@gmail.com', '$2y$10$aI0fjQaa3Q6ZWvnysEvYOO0NIoQvf/0lQZlIPpuKWh7FxKAWzbK/a', '2023-10-21 00:00:00');
@@ -234,7 +239,7 @@ ALTER TABLE `creador_mult`
 -- AUTO_INCREMENT de la tabla `eventodeporte`
 --
 ALTER TABLE `eventodeporte`
-  MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
