@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Evento</title>
+</head>
+<body>
+
+<h1>Formulario de Evento</h1>
+
+<form id="eventoForm">
+    <label for="nombreEvento">Nombre del evento:</label>
+    <input type="text" id="nombreEvento" name="nombre_evento" required>
+    <br>
+
+    <label for="tipoDeporte">Tipo de deporte:</label>
+    <input type="text" id="tipoDeporte" name="tipo_deporte" required>
+    <br>
+
+    <label for="lugarEvento">Lugar del evento:</label>
+    <input type="text" id="lugarEvento" name="lugar_evento" required>
+    <br>
+
+    <label for="fechaEvento">Fecha del evento:</label>
+    <input type="date" id="fechaEvento" name="fecha_evento" required>
+    <br>
+
+    <label for="imagenEvento">URL de imagen del evento:</label>
+    <input type="text" id="imagenEvento" name="img_evento" required>
+    <br>
+
+    <label for="horarioEvento">Horario del evento:</label>
+    <input type="text" id="horarioEvento" name="horario_evento" required>
+    <br>
+
+    <label for="urlTransmision">URL de transmisión:</label>
+    <input type="text" id="urlTransmision" name="url_transmision" required>
+    <br>
+
+    <button type="submit">Agregar Evento</button>
+</form>
+
+<script>
+    document.getElementById('eventoForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        fetch('http://localhost/Backend_web_/AgregarEvento.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+.then(result => {
+    if (result && result.message) {
+        alert(result.message);
+    } else {
+        console.error('Error: Respuesta JSON no válida', result);
+    }
+})
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+
+</body>
+</html>
